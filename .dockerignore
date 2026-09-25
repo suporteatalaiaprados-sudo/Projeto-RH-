@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+.env
+.env.*
+!.env.example
+!.env.pi.example
+coverage
+tests
+firebase-debug.log
+firestore-debug.log
+emulator-data
+firebase-export
+*.pem
+*service-account*.json

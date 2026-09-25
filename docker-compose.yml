@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_FIREBASE_API_KEY: ${NEXT_PUBLIC_FIREBASE_API_KEY:?Configure a configuração pública do Firebase}
+        NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:?Configure o domínio do Firebase Auth}
+        NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${NEXT_PUBLIC_FIREBASE_PROJECT_ID:?Configure o ID do projeto Firebase}
+        NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET:?Configure o bucket do Firebase}
+        NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID:?Configure o Messaging Sender ID}
+        NEXT_PUBLIC_FIREBASE_APP_ID: ${NEXT_PUBLIC_FIREBASE_APP_ID:?Configure o App ID do Firebase}
+        NEXT_PUBLIC_USE_FIREBASE_EMULATOR: "false"
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:?Configure a URL interna do AvaliaGestao}
+        NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_APP_NAME:-AvaliaGestão}
+    env_file:
+      - .env.pi
+    environment:
+      NODE_ENV: production
+      HOSTNAME: 0.0.0.0
+      PORT: 3000
+      NEXT_PUBLIC_USE_FIREBASE_EMULATOR: "false"
+    expose:
+      - "3000"
+    ports:
+      - "${SITE_BIND_IP:?Configure o IP reservado do Raspberry}:${SITE_APP_PORT:-8081}:3000"
+    restart: unless-stopped
